@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>994</width>
+    <height>576</height>
+   </rect>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(97, 97, 107);</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <italic>true</italic>
+    </font>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="maximumSize">
+       <size>
+        <width>497</width>
+        <height>31</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="clock">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>497</width>
+        <height>470</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resouces.qrc">:/C++/TimerStat/images/images/clock.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QSpinBox" name="spinBox">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>994</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuF_ile">
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="title">
+     <string>F&amp;ile</string>
+    </property>
+    <addaction name="actionO_pen"/>
+    <addaction name="actionS_ave"/>
+    <addaction name="actionS_ave_As"/>
+    <addaction name="actionE_xit"/>
+   </widget>
+   <widget class="QMenu" name="menuS_tats">
+    <property name="title">
+     <string>S&amp;tats</string>
+    </property>
+    <addaction name="actionV_iew"/>
+    <addaction name="actionE_dit"/>
+   </widget>
+   <widget class="QMenu" name="menuA_bout">
+    <property name="title">
+     <string>H&amp;elp</string>
+    </property>
+    <addaction name="actionA_bout"/>
+   </widget>
+   <addaction name="menuF_ile"/>
+   <addaction name="menuS_tats"/>
+   <addaction name="menuA_bout"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionO_pen">
+   <property name="text">
+    <string>O&amp;pen...</string>
+   </property>
+  </action>
+  <action name="actionS_ave">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>S&amp;ave...</string>
+   </property>
+  </action>
+  <action name="actionS_ave_As">
+   <property name="text">
+    <string>S&amp;ave As...</string>
+   </property>
+  </action>
+  <action name="actionA_bout">
+   <property name="text">
+    <string>A&amp;bout...</string>
+   </property>
+  </action>
+  <action name="actionV_iew">
+   <property name="text">
+    <string>V&amp;iew</string>
+   </property>
+  </action>
+  <action name="actionE_dit">
+   <property name="text">
+    <string>E&amp;dit</string>
+   </property>
+  </action>
+  <action name="actionE_xit">
+   <property name="text">
+    <string>E&amp;xit...</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="resouces.qrc"/>
+ </resources>
+ <connections/>
+</ui>
