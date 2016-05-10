@@ -110,6 +110,7 @@
     <property name="title">
      <string>F&amp;ile</string>
     </property>
+    <addaction name="actionNew"/>
     <addaction name="actionO_pen"/>
     <addaction name="actionS_ave"/>
     <addaction name="actionS_ave_As"/>
@@ -127,6 +128,7 @@
      <string>H&amp;elp</string>
     </property>
     <addaction name="actionA_bout"/>
+    <addaction name="actionTutorial_Tips"/>
    </widget>
    <addaction name="menuF_ile"/>
    <addaction name="menuS_tats"/>
@@ -177,6 +179,16 @@
   <action name="actionE_xit">
    <property name="text">
     <string>E&amp;xit...</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="text">
+    <string>New...</string>
+   </property>
+  </action>
+  <action name="actionTutorial_Tips">
+   <property name="text">
+    <string>Tutorial Tips</string>
    </property>
   </action>
  </widget>

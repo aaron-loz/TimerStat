@@ -22,6 +22,18 @@ private slots:
 
     void on_lineEdit_returnPressed();
 
+    void on_actionE_xit_triggered();
+
+    void on_actionO_pen_triggered();
+
+    void on_actionS_ave_triggered();
+
+    void on_actionS_ave_As_triggered();
+
+    void on_actionA_bout_triggered();
+
+    void ReadFile(const QString &fileName);
+    void WriteFile(const QString &fileName);
 private:
     Ui::MainWindow *ui;
 };
