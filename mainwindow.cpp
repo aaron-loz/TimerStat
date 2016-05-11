@@ -48,10 +48,11 @@ void MainWindow::on_actionA_bout_triggered()
 
 void MainWindow::on_actionO_pen_triggered()
 {
-    QString filename = QFileDialog::getOpenFileName(this);
-    if(!filename.isEmpty())
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                   QDir::currentPath(), tr("Text File(*.txt)"));
+    if(!fileName.isNull())
     {
-        //ReadFile();
+        this->ReadFile(fileName);
     }
 }
 
@@ -62,7 +63,6 @@ void MainWindow::on_actionS_ave_triggered()
 
 void MainWindow::on_actionS_ave_As_triggered()
 {
-//opens a dialog that asks for line edit input. Then Input becomes filename
     QString fileName = QFileDialog::getSaveFileName(this,tr("Save file"),
                                                     QDir::currentPath(), tr("Text FIle (*.txt)"));
     if(!fileName.isNull())
@@ -74,17 +74,18 @@ void MainWindow::on_actionS_ave_As_triggered()
 void MainWindow::ReadFile(const QString &fileName)
 {
     QFile file(fileName);
-    if(!file.open(QIODevice::ReadOnly))
+    if(!file.open(QIODevice::ReadOnly| QIODevice::Text))
     {
         QMessageBox::information(this, tr("Unable to open"),
                                  file.errorString());
         return;
     }
-    else
-    {
+    QTextStream in(&file);
+    QString textstream;
+    in>>textstream;
+    qDebug()<<textstream;
         //figure out what you want to do once you open the file.
         //Maybe tells person it is opened and current written time.
-    }
 }
 
 void MainWindow::WriteFile(const QString &fileName)
@@ -95,9 +96,12 @@ void MainWindow::WriteFile(const QString &fileName)
         QMessageBox::information(this, tr("Unable to open file"), file.errorString());
         return;
     }
-    QString textstream ="Projects    Time\n---------------------------" ;
-    //textstream = textstream + ui->lineEdit->text();
+    QString textstream, projectTitle;
+    textstream ="Projects    Time\n---------------------------\n" ;
+    projectTitle = ui->lineEdit->text() + "::";
+    //!Add in a dummy QString that logs time used and project titles, which will then write into out.
     QTextStream out(&file);
     out<<textstream;
+    out<<projectTitle;
 
 }
