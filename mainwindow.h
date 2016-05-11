@@ -17,6 +17,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    QString tempText;//tempText logs the file so far in current session
+    QString openFileText;//currentText shows what is in file being opened by OpenFile()
 
 private slots:
 

@@ -22,8 +22,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_lineEdit_returnPressed()
 {//This will add on to a project list once I set up a file
-    QString project = ui->lineEdit->text();
-    qDebug()<<project;
+    tempText +="\n"+ui->lineEdit->text()+"::";
 }
 
 void MainWindow::on_actionE_xit_triggered()
@@ -81,9 +80,8 @@ void MainWindow::ReadFile(const QString &fileName)
         return;
     }
     QTextStream in(&file);
-    QString textstream;
-    in>>textstream;
-    qDebug()<<textstream;
+    openFileText=in.readAll();
+    QMessageBox::about(this, "current Stats!", openFileText);
         //figure out what you want to do once you open the file.
         //Maybe tells person it is opened and current written time.
 }
@@ -96,12 +94,11 @@ void MainWindow::WriteFile(const QString &fileName)
         QMessageBox::information(this, tr("Unable to open file"), file.errorString());
         return;
     }
-    QString textstream, projectTitle;
-    textstream ="Projects    Time\n---------------------------\n" ;
-    projectTitle = ui->lineEdit->text() + "::";
+
+    QString textstream ="Projects    Time\n---------------------------\n" ;
     //!Add in a dummy QString that logs time used and project titles, which will then write into out.
     QTextStream out(&file);
     out<<textstream;
-    out<<projectTitle;
+    out<<tempText;
 
 }
