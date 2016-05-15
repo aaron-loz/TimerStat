@@ -13,9 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    qtimerthread.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    qtimerthread.h
 
 FORMS    += mainwindow.ui
 

@@ -19,6 +19,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::on_actionNew_triggered()
+{
+    //Closes the currently open file.Restarts openFileText and tempText
+    tempText.remove(0,tempText.size());
+    openFileText.remove(0,openFileText.size());
+    ui->lineEdit->clear();
+}
 
 void MainWindow::on_lineEdit_returnPressed()
 {//This will add on to a project list once I set up a file
@@ -57,11 +64,12 @@ void MainWindow::on_actionO_pen_triggered()
 
 void MainWindow::on_actionS_ave_triggered()
 {
-
+    on_actionS_ave_As_triggered();
 }
 
 void MainWindow::on_actionS_ave_As_triggered()
 {
+    saveOpened=false;
     QString fileName = QFileDialog::getSaveFileName(this,tr("Save file"),
                                                     QDir::currentPath(), tr("Text FIle (*.txt)"));
     if(!fileName.isNull())
@@ -94,11 +102,38 @@ void MainWindow::WriteFile(const QString &fileName)
         QMessageBox::information(this, tr("Unable to open file"), file.errorString());
         return;
     }
-
+    saveOpened = true;
     QString textstream ="Projects    Time\n---------------------------\n" ;
     //!Add in a dummy QString that logs time used and project titles, which will then write into out.
+    //! Also, Add a QTimer!
     QTextStream out(&file);
     out<<textstream;
     out<<tempText;
 
+}
+
+
+void MainWindow::on_spinBox_editingFinished()
+{
+    int number = ui->spinBox->value();
+    qDebug()<<number;
+    int timerValue = number * 60000;
+    timer.setSingleShot(false);
+//    timer->singleShot(3000,);
+    timer.start(timerValue);
+    //timerValue-=60000;
+//!at this point, make a new function that does this stuff
+    /*while(timer->isActive())
+    {
+        qDebug()<<timer->remainingTime();
+        /*int remainder = timer->remainingTime();
+        remainder=timerValue-60000
+        if()
+        {
+            timerValue-=60000;
+            number--;
+            ui->spinBox->setValue(number);
+            qDebug()<<number;
+        }//program freezes once activate this signal
+    }*/
 }

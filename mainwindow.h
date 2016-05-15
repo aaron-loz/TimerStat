@@ -5,6 +5,7 @@
 #include <QGraphicsWidget>
 #include <QGraphicsItem>
 #include <QLabel>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -19,7 +20,8 @@ public:
     ~MainWindow();
     QString tempText;//tempText logs the file so far in current session
     QString openFileText;//currentText shows what is in file being opened by OpenFile()
-
+    bool saveOpened;
+    QTimer timer;
 private slots:
 
     void on_lineEdit_returnPressed();
@@ -36,6 +38,10 @@ private slots:
 
     void ReadFile(const QString &fileName);
     void WriteFile(const QString &fileName);
+    void on_actionNew_triggered();
+
+    void on_spinBox_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 };
