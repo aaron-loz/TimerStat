@@ -57,17 +57,16 @@ public slots:
     }
     void run()
     {//create result, and creates signal
-        QString result;
-        for(int i=0;i<20;i++)
+        for(int i=5;i>0;i--)
         {
             qDebug()<<i;
+            emit changeSpinBox(i);
+            sleepTimer::sleep(60);
         }
         qDebug()<<"Timer Done!";
-        emit timerDone(result);
     }
-    void slotFinish(){qDebug()<<"finished!";}
 signals:
-    void timerDone(const QString &result);
+    void changeSpinBox(int &value);
 };
 
 #endif // MAINWINDOW_H

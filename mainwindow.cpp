@@ -116,11 +116,12 @@ void MainWindow::on_spinBox_editingFinished()
 {
     sleepTimer *thread = new sleepTimer();
     int number = ui->spinBox->value();
-    qDebug()<<number;
     int timerValue = number * 60000;//this is for minutes
     timer->setInterval(timerValue);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    connect(thread, SIGNAL(timerDone(QString)), this, SLOT(slotFinish()));
+//    connect(thread, SIGNAL(timerDone(QString)), this, SLOT(slotFinish()));
+    connect(thread, SIGNAL(changeSpinBox(int)), this, SLOT(run));
+    timer->start();
     timer->moveToThread(thread);
     thread->start();
     //QTimer::singleShot(timerValue, this, SLOT(q()));
