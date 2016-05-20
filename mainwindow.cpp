@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDebug>
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -115,25 +114,20 @@ void MainWindow::WriteFile(const QString &fileName)
 
 void MainWindow::on_spinBox_editingFinished()
 {
+    sleepTimer *thread = new sleepTimer();
     int number = ui->spinBox->value();
     qDebug()<<number;
-    int timerValue = number * 60000;
-    timer.setSingleShot(false);
-//    timer->singleShot(3000,);
-    timer.start(timerValue);
-    //timerValue-=60000;
-//!at this point, make a new function that does this stuff
-    /*while(timer->isActive())
+    int timerValue = number * 60000;//this is for minutes
+    timer->setInterval(timerValue);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(thread, SIGNAL(timerDone(QString)), this, SLOT(slotFinish()));
+    timer->moveToThread(thread);
+    thread->start();
+    //QTimer::singleShot(timerValue, this, SLOT(q()));
+    /*for(int i=number; i>=0;i--)
     {
-        qDebug()<<timer->remainingTime();
-        /*int remainder = timer->remainingTime();
-        remainder=timerValue-60000
-        if()
-        {
-            timerValue-=60000;
-            number--;
-            ui->spinBox->setValue(number);
-            qDebug()<<number;
-        }//program freezes once activate this signal
+        qDebug()<<i;
+        sleepTimer::sleep(60);
+        //stops thread for 1 msec as qDebug prints out
     }*/
 }
