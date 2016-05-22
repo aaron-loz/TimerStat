@@ -23,7 +23,7 @@ public:
     QString tempText;//tempText logs the file so far in current session
     QString openFileText;//currentText shows what is in file being opened by OpenFile()
     bool saveOpened;
-
+    int number;
 private slots:
 
     void on_lineEdit_returnPressed();
@@ -45,11 +45,16 @@ private slots:
     void on_spinBox_editingFinished();
 private:
     Ui::MainWindow *ui;
-    QTimer* timer=new QTimer;
+    QTimer* timer;
 };
 
 class sleepTimer: public QThread{
 Q_OBJECT
+private:
+    int num;
+    int debugThread = 0;
+public:
+    void setnum(int &n){num=n;}
 public slots:
     static void sleep(unsigned long secs){
         QThread::sleep(secs);
@@ -57,16 +62,17 @@ public slots:
     }
     void run()
     {//create result, and creates signal
-        for(int i=5;i>0;i--)
+        debugThread++;
+        qDebug()<<debugThread;
+        for(int i=num;i>0;i--)
         {
             qDebug()<<i;
-            emit changeSpinBox(i);
-            sleepTimer::sleep(60);
-        }
+            sleepTimer::sleep(3);
+        }//change back to 60
         qDebug()<<"Timer Done!";
     }
 signals:
-    void changeSpinBox(int &value);
+    void changeSpinBox();
 };
 
 #endif // MAINWINDOW_H

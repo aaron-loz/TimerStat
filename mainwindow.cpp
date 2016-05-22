@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QImage myImage;
     setWindowTitle(tr("Clock In!"));
     myImage.load(":/images/clock.png");
+    timer=new QTimer;
 }
 
 MainWindow::~MainWindow()
@@ -108,27 +109,20 @@ void MainWindow::WriteFile(const QString &fileName)
     QTextStream out(&file);
     out<<textstream;
     out<<tempText;
-
 }
 
 
 void MainWindow::on_spinBox_editingFinished()
 {
     sleepTimer *thread = new sleepTimer();
-    int number = ui->spinBox->value();
-    int timerValue = number * 60000;//this is for minutes
+    number = ui->spinBox->value();
+    thread->setnum(number);
+    int timerValue =number * 60000;//this is for minutes
     timer->setInterval(timerValue);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-//    connect(thread, SIGNAL(timerDone(QString)), this, SLOT(slotFinish()));
-    connect(thread, SIGNAL(changeSpinBox(int)), this, SLOT(run));
+    //connect(thread, SIGNAL(finished()),thread, SLOT(declareDeleted));
+    connect(thread,SIGNAL(finished()),thread, SLOT(deleteLater()));
     timer->start();
     timer->moveToThread(thread);
     thread->start();
-    //QTimer::singleShot(timerValue, this, SLOT(q()));
-    /*for(int i=number; i>=0;i--)
-    {
-        qDebug()<<i;
-        sleepTimer::sleep(60);
-        //stops thread for 1 msec as qDebug prints out
-    }*/
 }
