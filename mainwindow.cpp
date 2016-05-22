@@ -8,9 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QImage myImage;
+
     setWindowTitle(tr("Clock In!"));
-    myImage.load(":/images/clock.png");
 }
 
 MainWindow::~MainWindow()
@@ -114,7 +113,21 @@ void MainWindow::on_spinBox_editingFinished()
 {
     sleepTimer *thread = new sleepTimer();
     thread->num = ui->spinBox->value();
+    on_spinBox_valueChanged(thread->num);
     connect(thread, SIGNAL(finished()),thread, SLOT(declareDeleted()));
     connect(thread,SIGNAL(finished()),thread, SLOT(deleteLater()));
     thread->start();
+}
+
+void MainWindow::on_spinBox_valueChanged(int &arg1)
+{
+    switch(arg1)
+    {
+    case 1:
+        ui->clock->setPixmap(pix1);
+    break;
+    default:
+        ui->clock->setPixmap(pix0);
+        break;
+    }
 }

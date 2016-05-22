@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/C++/TimerStat/images">
         <file>images/clock.png</file>
+        <file>images/BlackClockHand.jpg</file>
+        <file>images/clockHandTimerDefault.png</file>
     </qresource>
 </RCC>

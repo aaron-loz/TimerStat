@@ -41,8 +41,26 @@ private slots:
     void on_actionNew_triggered();
 
     void on_spinBox_editingFinished();
+    void on_spinBox_valueChanged(int &arg1);
+
 private:
+    //!This all depends on a specific file location. Need to change that.
+    //! might need to create new file just to deal with this pixmap stuff.
+    //! or function that looks for current file, and has it change the pixmaps accordingly
     Ui::MainWindow *ui;
+    QPixmap pix0 =("/C++/TimerStat/images/clockHandTimerDefault.png");
+    QPixmap pix1 =("/C++/TimerStat/images/clock.png");
+   /*
+    QPixmap pix2 =();
+    QPixmap pix3 =();
+    QPixmap pix4 =();
+    QPixmap pix5 =();
+    QPixmap pix6 =();
+    QPixmap pix7 =();
+    QPixmap pix8 =();
+    QPixmap pix9 =();
+    QPixmap pix10 =();
+    */
 };
 
 class sleepTimer: public QThread{
@@ -56,11 +74,10 @@ public slots:
     void run()
     {//create result, and creates signal
 
-        for(int i=num*60;i>0;i--)
+        for(int i=num*60;i>0;i-=10)
         {
             qDebug()<<i;
             sleepTimer::sleep(10);
-            qDebug()<<"have ui element update";
         }
         qDebug()<<"Timer Done!";
     }
