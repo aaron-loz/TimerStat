@@ -126,6 +126,39 @@ void MainWindow::on_spinBox_valueChanged(int &arg1)
     case 1:
         ui->clock->setPixmap(pix1);
     break;
+    case 2:
+        ui->clock->setPixmap(pix2);
+        break;
+    case 3:
+        ui->clock->setPixmap(pix3);
+        break;
+    case 4:
+        ui->clock->setPixmap(pix4);
+        break;
+    case 5:
+        ui->clock->setPixmap(pix5);
+        break;
+    case 6:
+        ui->clock->setPixmap(pix6);
+        break;
+    case 7:
+        ui->clock->setPixmap(pix7);
+        break;
+    case 8:
+        ui->clock->setPixmap(pix8);
+        break;
+    case 9:
+        ui->clock->setPixmap(pix9);
+        break;
+    case 10:
+        ui->clock->setPixmap(pix10);
+        break;
+    case 11:
+        ui->clock->setPixmap(pix11);
+        break;
+    case 12:
+        ui->clock->setPixmap(pix12);
+        break;
     default:
         ui->clock->setPixmap(pix0);
         break;

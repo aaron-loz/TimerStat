@@ -85,6 +85,9 @@
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
+      <property name="maximum">
+       <number>12</number>
+      </property>
      </widget>
     </item>
    </layout>

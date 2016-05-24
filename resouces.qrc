@@ -1,7 +1,17 @@
 <RCC>
     <qresource prefix="/C++/TimerStat/images">
-        <file>images/clock.png</file>
-        <file>images/BlackClockHand.jpg</file>
         <file>images/clockHandTimerDefault.png</file>
+        <file>images/clockHandTimer1.png</file>
+        <file>images/clockHandTimer2.png</file>
+        <file>images/clockHandTimer3.png</file>
+        <file>images/clockHandTimer4.png</file>
+        <file>images/clockHandTimer5.png</file>
+        <file>images/clockHandTimer6.png</file>
+        <file>images/clockHandTimer7.png</file>
+        <file>images/clockHandTimer8.png</file>
+        <file>images/clockHandTimer9.png</file>
+        <file>images/clockHandTimer10.png</file>
+        <file>images/clockHandTimer11.png</file>
+        <file>images/clockHandTimer12.png</file>
     </qresource>
 </RCC>
