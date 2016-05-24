@@ -67,7 +67,7 @@
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resouces.qrc">:/C++/TimerStat/images/images/clockHandTimerDefault.png</pixmap>
+       <pixmap resource="resouces.qrc">:/TimerStat/images/images/clockHandTimerDefault.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>

@@ -48,19 +48,19 @@ private:
     //! might need to create new file just to deal with this pixmap stuff.
     //! or function that looks for current file, and has it change the pixmaps accordingly
     Ui::MainWindow *ui;
-    QPixmap pix0 =("/C++/TimerStat/images/clockHandTimerDefault.png");
-    QPixmap pix1 =("/C++/TimerStat/images/clockHandTimer1.png");
-    QPixmap pix2 =("/C++/TimerStat/images/clockHandTimer2.png");
-    QPixmap pix3 =("/C++/TimerStat/images/clockHandTimer3.png");
-    QPixmap pix4 =("/C++/TimerStat/images/clockHandTimer4.png");
-    QPixmap pix5 =("/C++/TimerStat/images/clockHandTimer5.png");
-    QPixmap pix6 =("/C++/TimerStat/images/clockHandTimer6.png");
-    QPixmap pix7 =("/C++/TimerStat/images/clockHandTimer7.png");
-    QPixmap pix8 =("/C++/TimerStat/images/clockHandTimer8.png");
-    QPixmap pix9 =("/C++/TimerStat/images/clockHandTimer9.png");
-    QPixmap pix10 =("/C++/TimerStat/images/clockHandTimer10.png");
-    QPixmap pix11 =("/C++/TimerStat/images/clockHandTimer11.png");
-    QPixmap pix12 = ("/C++/TimerStat/images/clockHandTimer12.png");
+    QPixmap pix0 =(":/TimerStat/images/images/clockHandTimerDefault.png");
+    QPixmap pix1 =(":/TimerStat/images/images/clockHandTimer1.png");
+    QPixmap pix2 =(":/TimerStat/images/images/clockHandTimer2.png");
+    QPixmap pix3 =(":/TimerStat/images/images/clockHandTimer3.png");
+    QPixmap pix4 =(":/TimerStat/images/images/clockHandTimer4.png");
+    QPixmap pix5 =(":/TimerStat/images/images/clockHandTimer5.png");
+    QPixmap pix6 =(":/TimerStat/images/images/clockHandTimer6.png");
+    QPixmap pix7 =(":/TimerStat/images/images/clockHandTimer7.png");
+    QPixmap pix8 =(":/TimerStat/images/images/clockHandTimer8.png");
+    QPixmap pix9 =(":/TimerStat/images/images/clockHandTimer9.png");
+    QPixmap pix10 = (":/TimerStat/images/images/clockHandTimer10.png");
+    QPixmap pix11 = (":/TimerStat/images/images/clockHandTimer11.png");
+    QPixmap pix12 = (":/TimerStat/images/images/clockHandTimer12.png");
 };
 
 class sleepTimer: public QThread{
