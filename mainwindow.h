@@ -23,6 +23,8 @@ public:
     QString tempText;//tempText logs the file so far in current session
     QString openFileText;//currentText shows what is in file being opened by OpenFile()
     bool saveOpened;
+public slots:
+    void changeLED();
 private slots:
 
     void on_lineEdit_returnPressed();
@@ -38,12 +40,11 @@ private slots:
     void on_actionA_bout_triggered();
 
     void ReadFile(const QString &fileName);
-    void WriteFile(const QString &fileName);
+    void writeFile(const QString &fileName);
     void on_actionNew_triggered();
 
     void on_spinBox_editingFinished();
     void on_spinBox_valueChanged(int &arg1);
-
 private:
 
     Ui::MainWindow *ui;
@@ -77,13 +78,13 @@ public slots:
         for(int i=num*60;i>0;i-=10)
         {//counts the seconds
             qDebug()<<i;
+            emit changeTime();
             sleepTimer::sleep(10);
         }
         qDebug()<<"Timer Done!";
     }
-    void declareDeleted()
-    {qDebug()<<"Thread deleted!";}
 signals:
+    void changeTime();
 };
 
 #endif // MAINWINDOW_H

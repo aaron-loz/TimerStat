@@ -17,8 +17,8 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_actionNew_triggered()
-{
-    //Closes the currently open file.Restarts openFileText and tempText
+{//Closes the currently open file.Restarts openFileText and tempText
+    file.close();
     tempText.remove(0,tempText.size());
     openFileText.remove(0,openFileText.size());
     ui->lineEdit->clear();
@@ -26,7 +26,9 @@ void MainWindow::on_actionNew_triggered()
 
 void MainWindow::on_lineEdit_returnPressed()
 {//This will add on to a project list once I set up a file
-    tempText +="\n"+ui->lineEdit->text()+"::";
+    if(tempText.endsWith(":")){}
+    else
+        tempText +="\n"+ui->lineEdit->text()+"::";
 }
 
 void MainWindow::on_actionE_xit_triggered()
@@ -34,14 +36,8 @@ void MainWindow::on_actionE_xit_triggered()
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Exit", "Are you sure you wanna Quit?",
                                   QMessageBox::Yes | QMessageBox::No);
-    switch(reply)
-    {
-    case QMessageBox::Yes:
+    if(reply == QMessageBox::Yes)
         QCoreApplication::exit();
-        break;
-    default:
-        break;
-    }
 }
 
 void MainWindow::on_actionA_bout_triggered()
@@ -63,7 +59,7 @@ void MainWindow::on_actionS_ave_triggered()
 {
     if(file.isOpen())
     {//need another function to write or do if statments in writeFile()
-        this->WriteFile(file.fileName());
+        this->writeFile(file.fileName());
     }
     else
     {
@@ -77,14 +73,14 @@ void MainWindow::on_actionS_ave_As_triggered()
                                                     QDir::currentPath(), tr("Text FIle (*.txt)"));
     if(!fileName.isNull())
     {
-        this->WriteFile(fileName);
+        this->writeFile(fileName);
     }
 }
 
 void MainWindow::ReadFile(const QString &fileName)
 {
     file.setFileName(fileName);
-    if(!file.open(QIODevice::ReadOnly| QIODevice::Text))
+    if(!file.open(QIODevice::ReadWrite| QIODevice::Text))
     {
         QMessageBox::information(this, tr("Unable to open"),
                                  file.errorString());
@@ -97,22 +93,20 @@ void MainWindow::ReadFile(const QString &fileName)
         //Maybe tells person it is opened and current written time.
 }
 
-void MainWindow::WriteFile(const QString &fileName)
+void MainWindow::writeFile(const QString &fileName)
 {//This will write into a .txt file the project and the amount of time, in hours.
-    //Such that The first line says "Projects *Spacex4* Amount of time". Then a list of projects and the numbers
+    QTextStream out(&file);
     if(file.isOpen())
     {
-
+        out<<tempText;
     }
     else{
     file.setFileName(fileName);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QMessageBox::information(this, tr("Unable to open file"), file.errorString());
-        return;
-    }
-    QString textstream ="Projects    Time\n---------------------------\n" ;
-    //!Add in a dummy QString that logs time used and project titles, which will then write into out.
-    QTextStream out(&file);
+        if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+            QMessageBox::information(this, tr("Unable to open file"), file.errorString());
+            return;
+        }
+    QString textstream ="Projects    :   Time\n---------------------------" ;
     out<<textstream;
     out<<tempText;
     }
@@ -120,12 +114,27 @@ void MainWindow::WriteFile(const QString &fileName)
 
 void MainWindow::on_spinBox_editingFinished()
 {
+    int spinValue = ui->spinBox->value();
     sleepTimer *thread = new sleepTimer();
-    thread->num = ui->spinBox->value();
+    thread->num = spinValue;
+    if(ui->lineEdit->text()== NULL)
+     tempText+="\nno project title::";
+    else
+        on_lineEdit_returnPressed();
+    QString s= QString::number(spinValue);
+    tempText.append(s);
+    tempText +=" minutes";
     on_spinBox_valueChanged(thread->num);
-    connect(thread, SIGNAL(finished()),thread, SLOT(declareDeleted()));
     connect(thread,SIGNAL(finished()),thread, SLOT(deleteLater()));
+    connect(thread,SIGNAL(changeTime()),this, SLOT(changeLED()));
+    //the second connect lets the thread control the LED in the ui
     thread->start();
+}
+void MainWindow::changeLED()
+{
+    ui->lcd1->display(1);
+    qDebug()<<"It worked!";
+    //!Make the digit change correctly
 }
 
 void MainWindow::on_spinBox_valueChanged(int &arg1)
