@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QThread>
 #include <QDebug>
+#include <QFileDialog>
 
 namespace Ui {
 class MainWindow;
@@ -44,9 +45,7 @@ private slots:
     void on_spinBox_valueChanged(int &arg1);
 
 private:
-    //!This all depends on a specific file location. Need to change that.
-    //! might need to create new file just to deal with this pixmap stuff.
-    //! or function that looks for current file, and has it change the pixmaps accordingly
+
     Ui::MainWindow *ui;
     QPixmap pix0 =(":/TimerStat/images/images/clockHandTimerDefault.png");
     QPixmap pix1 =(":/TimerStat/images/images/clockHandTimer1.png");
@@ -61,6 +60,7 @@ private:
     QPixmap pix10 = (":/TimerStat/images/images/clockHandTimer10.png");
     QPixmap pix11 = (":/TimerStat/images/images/clockHandTimer11.png");
     QPixmap pix12 = (":/TimerStat/images/images/clockHandTimer12.png");
+    QFile file;
 };
 
 class sleepTimer: public QThread{
@@ -75,7 +75,7 @@ public slots:
     {//create result, and creates signal
 
         for(int i=num*60;i>0;i-=10)
-        {
+        {//counts the seconds
             qDebug()<<i;
             sleepTimer::sleep(10);
         }

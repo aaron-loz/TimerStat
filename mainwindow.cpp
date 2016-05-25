@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QFileDialog>
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -62,12 +61,18 @@ void MainWindow::on_actionO_pen_triggered()
 
 void MainWindow::on_actionS_ave_triggered()
 {
-    on_actionS_ave_As_triggered();
+    if(file.isOpen())
+    {//need another function to write or do if statments in writeFile()
+        this->WriteFile(file.fileName());
+    }
+    else
+    {
+        this->on_actionS_ave_As_triggered();
+    }
 }
 
 void MainWindow::on_actionS_ave_As_triggered()
 {
-    saveOpened=false;
     QString fileName = QFileDialog::getSaveFileName(this,tr("Save file"),
                                                     QDir::currentPath(), tr("Text FIle (*.txt)"));
     if(!fileName.isNull())
@@ -78,7 +83,7 @@ void MainWindow::on_actionS_ave_As_triggered()
 
 void MainWindow::ReadFile(const QString &fileName)
 {
-    QFile file(fileName);
+    file.setFileName(fileName);
     if(!file.open(QIODevice::ReadOnly| QIODevice::Text))
     {
         QMessageBox::information(this, tr("Unable to open"),
@@ -95,19 +100,23 @@ void MainWindow::ReadFile(const QString &fileName)
 void MainWindow::WriteFile(const QString &fileName)
 {//This will write into a .txt file the project and the amount of time, in hours.
     //Such that The first line says "Projects *Spacex4* Amount of time". Then a list of projects and the numbers
-    QFile file(fileName);
+    if(file.isOpen())
+    {
+
+    }
+    else{
+    file.setFileName(fileName);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QMessageBox::information(this, tr("Unable to open file"), file.errorString());
         return;
     }
-    saveOpened = true;
     QString textstream ="Projects    Time\n---------------------------\n" ;
     //!Add in a dummy QString that logs time used and project titles, which will then write into out.
     QTextStream out(&file);
     out<<textstream;
     out<<tempText;
+    }
 }
-
 
 void MainWindow::on_spinBox_editingFinished()
 {
@@ -160,7 +169,12 @@ void MainWindow::on_spinBox_valueChanged(int &arg1)
         ui->clock->setPixmap(pix12);
         break;
     default:
+        if(arg1==0){
         ui->clock->setPixmap(pix0);
+        }
+        else{
+            ui->clock->setPixmap(pix12);
+        }
         break;
     }
 }

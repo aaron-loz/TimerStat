@@ -86,7 +86,7 @@
        <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
       <property name="maximum">
-       <number>12</number>
+       <number>60</number>
       </property>
      </widget>
     </item>
