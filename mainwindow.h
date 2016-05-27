@@ -22,9 +22,8 @@ public:
     ~MainWindow();
     QString tempText;//tempText logs the file so far in current session
     QString openFileText;//currentText shows what is in file being opened by OpenFile()
-    bool saveOpened;
 public slots:
-    void changeLED();
+    void changeLCD(int i);
 private slots:
 
     void on_lineEdit_returnPressed();
@@ -45,6 +44,10 @@ private slots:
 
     void on_spinBox_editingFinished();
     void on_spinBox_valueChanged(int &arg1);
+    void on_actionV_iew_triggered();
+
+    void on_actionE_dit_triggered();
+
 private:
 
     Ui::MainWindow *ui;
@@ -75,16 +78,17 @@ public slots:
     void run()
     {//create result, and creates signal
 
-        for(int i=num*60;i>0;i-=10)
+        for(int i=num*60;i>=0;i-=5)
         {//counts the seconds
             qDebug()<<i;
-            emit changeTime();
-            sleepTimer::sleep(10);
+            emit changeTime(i);
+            if(i>0)
+            sleepTimer::sleep(5);
         }
         qDebug()<<"Timer Done!";
     }
 signals:
-    void changeTime();
+    void changeTime(int i);
 };
 
 #endif // MAINWINDOW_H

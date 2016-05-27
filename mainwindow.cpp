@@ -77,6 +77,33 @@ void MainWindow::on_actionS_ave_As_triggered()
     }
 }
 
+void MainWindow::on_actionV_iew_triggered()
+{
+    if(!file.isOpen())
+    {
+        QMessageBox::information(this, tr("No File Open"),
+                                 "No File is Open! Please Save First");
+                return;
+    }
+    else
+        this->ReadFile(file.fileName());
+}
+
+
+void MainWindow::on_actionE_dit_triggered()
+{
+   if(file.isOpen())
+   {
+      //!have the text file open to an editor.
+   }
+   else
+   {
+       QMessageBox::information(this, tr("No File Open"),
+                                "No File is Open! Please Save or Open File First");
+               return;
+   }
+}
+
 void MainWindow::ReadFile(const QString &fileName)
 {
     file.setFileName(fileName);
@@ -89,8 +116,7 @@ void MainWindow::ReadFile(const QString &fileName)
     QTextStream in(&file);
     openFileText=in.readAll();
     QMessageBox::about(this, "current Stats!", openFileText);
-        //figure out what you want to do once you open the file.
-        //Maybe tells person it is opened and current written time.
+
 }
 
 void MainWindow::writeFile(const QString &fileName)
@@ -117,24 +143,26 @@ void MainWindow::on_spinBox_editingFinished()
     int spinValue = ui->spinBox->value();
     sleepTimer *thread = new sleepTimer();
     thread->num = spinValue;
+
     if(ui->lineEdit->text()== NULL)
      tempText+="\nno project title::";
     else
         on_lineEdit_returnPressed();
+
     QString s= QString::number(spinValue);
     tempText.append(s);
     tempText +=" minutes";
     on_spinBox_valueChanged(thread->num);
     connect(thread,SIGNAL(finished()),thread, SLOT(deleteLater()));
-    connect(thread,SIGNAL(changeTime()),this, SLOT(changeLED()));
+    connect(thread,SIGNAL(changeTime(int)),this, SLOT(changeLCD(int)));
     //the second connect lets the thread control the LED in the ui
     thread->start();
 }
-void MainWindow::changeLED()
+void MainWindow::changeLCD(int i)
 {
-    ui->lcd1->display(1);
-    qDebug()<<"It worked!";
-    //!Make the digit change correctly
+    qDebug()<<"LCD: "<<i;
+
+    ui->lcd1->display(i);
 }
 
 void MainWindow::on_spinBox_valueChanged(int &arg1)
