@@ -92,6 +92,9 @@
     </item>
     <item row="2" column="0">
      <widget class="QLCDNumber" name="lcd1">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>

@@ -67,6 +67,9 @@ private:
     QPixmap pix12 = (":/TimerStat/images/images/clockHandTimer12.png");
     QFile file;
     fileEditDialog *fileDialog;
+    QTextStream in;
+signals:
+    void changeDialog();
 };
 
 class sleepTimer: public QThread{

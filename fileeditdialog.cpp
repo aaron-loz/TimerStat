@@ -7,7 +7,6 @@ fileEditDialog::fileEditDialog(QWidget *parent) :
     ui(new Ui::fileEditDialog)
 {
     ui->setupUi(this);
-    ui->textEdit->setPlainText(fileText);
 }
 
 fileEditDialog::~fileEditDialog()
@@ -19,4 +18,9 @@ void fileEditDialog::on_buttonBox_accepted()
 {
     fileText =ui->textEdit->toPlainText();
     qDebug()<<fileText;
+}
+
+void fileEditDialog::setTextEdits()
+{//using a signal, the function runs before the app is exec()
+    ui->textEdit->setHtml(fileText);
 }

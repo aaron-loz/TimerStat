@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     fileDialog = new fileEditDialog;
     setWindowTitle(tr("Clock In!"));
+    connect(this, SIGNAL(changeDialog()), fileDialog, SLOT(setTextEdits()));
 }
 
 MainWindow::~MainWindow()
@@ -89,16 +90,18 @@ void MainWindow::on_actionV_iew_triggered()
         this->ReadFile(file.fileName());
 }
 
-
 void MainWindow::on_actionE_dit_triggered()
 {
    if(file.isOpen())
    {
-      QTextStream in(&file);
-      openFileText =in.readAll();
-      fileDialog->fileText =openFileText;
+      fileDialog->fileText = openFileText;
+      emit changeDialog();
       if(fileDialog->exec())
-      {
+      {//fileText will write into the save file that is open
+          tempText =fileDialog->fileText;
+          file.resize(0);
+          QTextStream out(&file);
+          out<<tempText;
       }
       //!have the text file open to an editor.
    }
@@ -119,7 +122,7 @@ void MainWindow::ReadFile(const QString &fileName)
                                  file.errorString());
         return;
     }
-    QTextStream in(&file);
+    in.setDevice(&file);
     openFileText=in.readAll();
     QMessageBox::about(this, "current Stats!", openFileText);
 
@@ -138,7 +141,7 @@ void MainWindow::writeFile(const QString &fileName)
             QMessageBox::information(this, tr("Unable to open file"), file.errorString());
             return;
         }
-    QString textstream ="Projects    :   Time\n---------------------------" ;
+    QString textstream ="Projects    :   Time\n---------------------------\n" ;
     out<<textstream;
     out<<tempText;
     }
