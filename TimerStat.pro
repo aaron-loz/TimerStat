@@ -13,11 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    fileeditdialog.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    fileeditdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    fileeditdialog.ui
 
 RESOURCES += \
     resouces.qrc

@@ -8,6 +8,7 @@
 #include <QThread>
 #include <QDebug>
 #include <QFileDialog>
+#include "fileeditdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -65,6 +66,7 @@ private:
     QPixmap pix11 = (":/TimerStat/images/images/clockHandTimer11.png");
     QPixmap pix12 = (":/TimerStat/images/images/clockHandTimer12.png");
     QFile file;
+    fileEditDialog *fileDialog;
 };
 
 class sleepTimer: public QThread{
@@ -90,5 +92,4 @@ public slots:
 signals:
     void changeTime(int i);
 };
-
 #endif // MAINWINDOW_H

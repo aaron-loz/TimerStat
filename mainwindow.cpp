@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    fileDialog = new fileEditDialog;
     setWindowTitle(tr("Clock In!"));
 }
 
@@ -94,6 +94,12 @@ void MainWindow::on_actionE_dit_triggered()
 {
    if(file.isOpen())
    {
+      QTextStream in(&file);
+      openFileText =in.readAll();
+      fileDialog->fileText =openFileText;
+      if(fileDialog->exec())
+      {
+      }
       //!have the text file open to an editor.
    }
    else
