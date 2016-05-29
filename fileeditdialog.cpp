@@ -1,6 +1,5 @@
 #include "fileeditdialog.h"
 #include "ui_fileeditdialog.h"
-#include <QDebug>
 
 fileEditDialog::fileEditDialog(QWidget *parent) :
     QDialog(parent),
@@ -17,7 +16,6 @@ fileEditDialog::~fileEditDialog()
 void fileEditDialog::on_buttonBox_accepted()
 {
     fileText =ui->textEdit->toPlainText();
-    qDebug()<<fileText;
 }
 
 void fileEditDialog::setTextEdits()

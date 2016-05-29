@@ -6,7 +6,7 @@
 #include <QGraphicsItem>
 #include <QLabel>
 #include <QThread>
-#include <QDebug>
+#include <QTextStream>
 #include <QFileDialog>
 #include "fileeditdialog.h"
 
@@ -85,12 +85,10 @@ public slots:
 
         for(int i=num*60;i>=0;i-=5)
         {//counts the seconds
-            qDebug()<<i;
             emit changeTime(i);
             if(i>0)
             sleepTimer::sleep(5);
         }
-        qDebug()<<"Timer Done!";
     }
 signals:
     void changeTime(int i);

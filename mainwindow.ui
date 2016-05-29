@@ -156,7 +156,6 @@
      <string>H&amp;elp</string>
     </property>
     <addaction name="actionA_bout"/>
-    <addaction name="actionTutorial_Tips"/>
    </widget>
    <addaction name="menuF_ile"/>
    <addaction name="menuS_tats"/>

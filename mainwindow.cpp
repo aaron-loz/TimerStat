@@ -141,7 +141,7 @@ void MainWindow::writeFile(const QString &fileName)
             QMessageBox::information(this, tr("Unable to open file"), file.errorString());
             return;
         }
-    QString textstream ="Projects    :   Time\n---------------------------\n" ;
+    QString textstream ="Projects    ::   Time\n---------------------------\n" ;
     out<<textstream;
     out<<tempText;
     }
@@ -153,10 +153,10 @@ void MainWindow::on_spinBox_editingFinished()
     sleepTimer *thread = new sleepTimer();
     thread->num = spinValue;
 
-    if(ui->lineEdit->text()== NULL)
-     tempText+="\nno project title::";
-    else
-        on_lineEdit_returnPressed();
+    if(ui->lineEdit->text()== NULL){
+     tempText+="\nno project title::";}
+    else{
+        on_lineEdit_returnPressed();}
 
     QString s= QString::number(spinValue);
     tempText.append(s);
@@ -169,8 +169,6 @@ void MainWindow::on_spinBox_editingFinished()
 }
 void MainWindow::changeLCD(int i)
 {
-    qDebug()<<"LCD: "<<i;
-
     ui->lcd1->display(i);
 }
 
